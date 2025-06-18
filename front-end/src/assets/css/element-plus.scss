@@ -1,0 +1,39 @@
+@import "element-plus/dist/index.css";
+@import "element-plus/theme-chalk/dark/css-vars.css";
+
+// @import "element-plus/theme-chalk/src/mixins/config.scss";
+
+// 强制所有输入框透明背景
+.el-input__wrapper,
+.el-textarea__wrapper {
+  background-color: transparent !important;
+  background: transparent !important;
+  
+  &.is-focus {
+    background-color: transparent !important;
+  }
+}
+
+.el-input__inner,
+.el-textarea__inner {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: inherit !important;
+}
+
+// 特别处理各种类型的输入框
+.el-select .el-input__wrapper,
+.el-input-number .el-input__wrapper,
+.el-date-editor .el-input__wrapper,
+.el-cascader .el-input__wrapper,
+.el-autocomplete .el-input__wrapper {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+// 确保表单项内的所有输入框都是透明的
+.el-form-item .el-input__wrapper {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+

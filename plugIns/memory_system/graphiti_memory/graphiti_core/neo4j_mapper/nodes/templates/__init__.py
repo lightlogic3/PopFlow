@@ -1,0 +1,58 @@
+"""
+节点查询模板初始化文件
+导出所有节点相关的Cypher查询模板
+"""
+
+from plugIns.memory_system.graphiti_memory.graphiti_core.neo4j_mapper.nodes.templates.node_templates import (
+    # 基础节点模板
+    NODE_DELETE,
+    NODE_DELETE_BY_GROUP_ID,
+    
+    # 实体节点模板
+    ENTITY_NODE_SAVE,
+    ENTITY_NODE_GET_BY_UUID,
+    ENTITY_NODE_GET_BY_UUIDS,
+    ENTITY_NODE_GET_BY_GROUP_IDS,
+    ENTITY_NODE_LOAD_EMBEDDING,
+    
+    # 情节节点模板
+    EPISODIC_NODE_SAVE,
+    EPISODIC_NODE_GET_BY_UUID,
+    EPISODIC_NODE_GET_BY_UUIDS,
+    EPISODIC_NODE_GET_BY_GROUP_IDS,
+    EPISODIC_NODE_GET_BY_ENTITY_NODE_UUID,
+    
+    # 社区节点模板
+    COMMUNITY_NODE_SAVE,
+    COMMUNITY_NODE_GET_BY_UUID,
+    COMMUNITY_NODE_GET_BY_UUIDS,
+    COMMUNITY_NODE_GET_BY_GROUP_IDS,
+    COMMUNITY_NODE_LOAD_EMBEDDING,
+)
+
+__all__ = [
+    # 基础节点模板
+    'NODE_DELETE',
+    'NODE_DELETE_BY_GROUP_ID',
+    
+    # 实体节点模板
+    'ENTITY_NODE_SAVE',
+    'ENTITY_NODE_GET_BY_UUID',
+    'ENTITY_NODE_GET_BY_UUIDS',
+    'ENTITY_NODE_GET_BY_GROUP_IDS',
+    'ENTITY_NODE_LOAD_EMBEDDING',
+    
+    # 情节节点模板
+    'EPISODIC_NODE_SAVE',
+    'EPISODIC_NODE_GET_BY_UUID',
+    'EPISODIC_NODE_GET_BY_UUIDS',
+    'EPISODIC_NODE_GET_BY_GROUP_IDS',
+    'EPISODIC_NODE_GET_BY_ENTITY_NODE_UUID',
+    
+    # 社区节点模板
+    'COMMUNITY_NODE_SAVE',
+    'COMMUNITY_NODE_GET_BY_UUID',
+    'COMMUNITY_NODE_GET_BY_UUIDS',
+    'COMMUNITY_NODE_GET_BY_GROUP_IDS',
+    'COMMUNITY_NODE_LOAD_EMBEDDING',
+] 

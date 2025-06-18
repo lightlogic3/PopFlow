@@ -1,0 +1,40 @@
+/* Element Plus 样式覆盖 */
+
+/* 输入框透明背景 */
+.el-input__wrapper,
+.el-textarea__wrapper,
+.el-input__inner,
+.el-textarea__inner {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 确保输入框内部元素也是透明的 */
+.el-input__inner,
+.el-textarea__inner {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 特殊处理各种类型的输入框 */
+.el-select .el-input__wrapper,
+.el-input-number .el-input__wrapper,
+.el-date-editor .el-input__wrapper,
+.el-cascader .el-input__wrapper,
+.el-autocomplete .el-input__wrapper {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 确保表单项内的所有输入框都是透明的 */
+.el-form-item .el-input__wrapper {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 禁用状态下也保持透明 */
+.is-disabled .el-input__wrapper,
+.is-disabled .el-textarea__wrapper {
+  background-color: rgba(50, 50, 60, 0.2) !important;
+  background: rgba(50, 50, 60, 0.2) !important;
+} 
