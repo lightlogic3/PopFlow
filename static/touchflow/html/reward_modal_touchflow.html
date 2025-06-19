@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>TouchFlow Pixel Reward Modal</title>
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			:root {
+				--primary-green: #00ff88;
+				--primary-cyan: #00d4ff;
+				--primary-purple: #8b5cf6;
+				--pixel-gold: #ffd700;
+				--dark-bg: #0a0a0a;
+				--darker-bg: #050505;
+				--card-bg: #111111;
+				--border-color: #333333;
+				--text-primary: #ffffff;
+				--text-secondary: #a1a1aa;
+				--text-muted: #71717a;
+			}
+
+			body {
+				font-family: 'Press Start 2P', monospace;
+				background: var(--dark-bg);
+				color: var(--text-primary);
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+				background:
+					radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.15) 0%, transparent 50%),
+					radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
+					radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+				image-rendering: pixelated;
+			}
+
+			/* 像素网格背景 */
+			.pixel-grid {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0.05;
+				z-index: 1;
+				background-image:
+					linear-gradient(rgba(0, 255, 136, 0.5) 1px, transparent 1px),
+					linear-gradient(90deg, rgba(0, 255, 136, 0.5) 1px, transparent 1px);
+				background-size: 16px 16px;
+				animation: pixelGridMove 8s linear infinite;
+			}
+
+			@keyframes pixelGridMove {
+				0% {
+					transform: translate(0, 0);
+				}
+
+				100% {
+					transform: translate(16px, 16px);
+				}
+			}
+
+			/* 像素粒子容器 */
+			.pixel-particles-container {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				z-index: 2;
+			}
+
+			.pixel-particle {
+				position: absolute;
+				image-rendering: pixelated;
+				animation: pixelParticleFloat 2s ease-out forwards;
+			}
+
+			@keyframes pixelParticleFloat {
+				0% {
+					opacity: 1;
+					transform: scale(0) rotate(0deg);
+				}
+
+				25% {
+					opacity: 1;
+					transform: scale(1) rotate(90deg);
+				}
+
+				75% {
+					opacity: 0.5;
+					transform: scale(1.2) rotate(270deg);
+				}
+
+				100% {
+					opacity: 0;
+					transform: scale(0) rotate(360deg) translateY(-100px);
+				}
+			}
+
+			/* 像素光芒效果 */
+			.pixel-rays-container {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				width: 240px;
+				height: 240px;
+				transform: translate(-50%, -50%);
+				pointer-events: none;
+				z-index: 3;
+			}
+
+			.pixel-ray {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 4px;
+				height: 80px;
+				background: var(--primary-green);
+				transform-origin: bottom center;
+				opacity: 0.8;
+				animation: pixelRayRotate 3s steps(16, end) infinite;
+				image-rendering: pixelated;
+			}
+
+			.pixel-ray:nth-child(2n) {
+				background: var(--primary-cyan);
+			}
+
+			.pixel-ray:nth-child(3n) {
+				background: var(--primary-purple);
+			}
+
+			@keyframes pixelRayRotate {
+				from {
+					transform: rotate(0deg) translateY(-40px);
+				}
+
+				to {
+					transform: rotate(360deg) translateY(-40px);
+				}
+			}
+
+			/* 模态框 */
+			.ai-game-modal-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.95);
+				z-index: 1000;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				animation: pixelOverlayFadeIn 1s steps(8, end);
+			}
+
+			@keyframes pixelOverlayFadeIn {
+				from {
+					opacity: 0;
+				}
+
+				to {
+					opacity: 1;
+				}
+			}
+
+			.ai-game-reward-modal {
+				background: var(--card-bg);
+				border: 4px solid var(--primary-green);
+				width: 560px;
+				max-width: 90vw;
+				position: relative;
+				overflow: hidden;
+				animation: pixelModalBounce 1.5s steps(24, end);
+				box-shadow:
+					0 0 0 2px var(--dark-bg),
+					0 0 0 6px var(--primary-cyan),
+					12px 12px 0 0 rgba(0, 255, 136, 0.4);
+				image-rendering: pixelated;
+			}
+
+			@keyframes pixelModalBounce {
+				0% {
+					opacity: 0;
+					transform: scale(0.2) rotate(-15deg);
+				}
+
+				40% {
+					opacity: 1;
+					transform: scale(1.2) rotate(5deg);
+				}
+
+				70% {
+					transform: scale(0.9) rotate(-2deg);
+				}
+
+				100% {
+					opacity: 1;
+					transform: scale(1) rotate(0deg);
+				}
+			}
+
+			/* 像素边框装饰 */
+			.ai-game-pixel-border-animated {
+				position: absolute;
+				top: -4px;
+				left: -4px;
+				right: -4px;
+				height: 16px;
+				background: repeating-linear-gradient(90deg,
+						var(--primary-green) 0px,
+						var(--primary-green) 8px,
+						var(--primary-cyan) 8px,
+						var(--primary-cyan) 16px,
+						var(--primary-purple) 16px,
+						var(--primary-purple) 24px);
+				animation: pixelBorderFlow 2s steps(12, end) infinite;
+			}
+
+			@keyframes pixelBorderFlow {
+				0% {
+					background-position: 0px 0px;
+				}
+
+				100% {
+					background-position: 24px 0px;
+				}
+			}
+
+			.ai-game-pixel-corner {
+				position: absolute;
+				width: 16px;
+				height: 16px;
+				background: var(--pixel-gold);
+				animation: pixelCornerBlink 1s steps(4, end) infinite;
+			}
+
+			.ai-game-pixel-corner.top-left {
+				top: -4px;
+				left: -4px;
+			}
+
+			.ai-game-pixel-corner.top-right {
+				top: -4px;
+				right: -4px;
+			}
+
+			.ai-game-pixel-corner.bottom-left {
+				bottom: -4px;
+				left: -4px;
+			}
+
+			.ai-game-pixel-corner.bottom-right {
+				bottom: -4px;
+				right: -4px;
+			}
+
+			@keyframes pixelCornerBlink {
+
+				0%,
+				50% {
+					opacity: 1;
+				}
+
+				51%,
+				100% {
+					opacity: 0.5;
+				}
+			}
+
+			/* 关闭按钮 */
+			.ai-game-modal-close {
+				position: absolute;
+				top: 16px;
+				right: 16px;
+				width: 32px;
+				height: 32px;
+				background: var(--darker-bg);
+				border: 2px solid var(--border-color);
+				color: var(--text-secondary);
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 16px;
+				font-family: 'Press Start 2P', monospace;
+				transition: all 0.3s steps(4, end);
+				z-index: 10;
+				image-rendering: pixelated;
+			}
+
+			.ai-game-modal-close:hover {
+				border-color: var(--primary-green);
+				color: var(--primary-green);
+				background: rgba(0, 255, 136, 0.2);
+				transform: scale(1.2) rotate(90deg);
+			}
+
+			/* 模态框内容 */
+			.ai-game-modal-content {
+				padding: 40px 32px 32px;
+				position: relative;
+				z-index: 5;
+				text-align: center;
+			}
+
+			/* 像素成就标志 */
+			.ai-game-pixel-achievement-badge {
+				display: inline-block;
+				padding: 8px 16px;
+				background: var(--pixel-gold);
+				border: 2px solid var(--dark-bg);
+				color: var(--dark-bg);
+				font-size: 8px;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				margin-bottom: 16px;
+				animation: pixelBadgeGlow 2s steps(8, end) infinite alternate;
+				box-shadow:
+					0 0 0 2px var(--pixel-gold),
+					4px 4px 0 0 rgba(255, 215, 0, 0.5);
+			}
+
+			@keyframes pixelBadgeGlow {
+				from {
+					box-shadow:
+						0 0 0 2px var(--pixel-gold),
+						4px 4px 0 0 rgba(255, 215, 0, 0.5);
+				}
+
+				to {
+					box-shadow:
+						0 0 0 2px var(--pixel-gold),
+						8px 8px 0 0 rgba(255, 215, 0, 0.8);
+				}
+			}
+
+			.ai-game-pixel-achievement-title {
+				font-size: 16px;
+				color: var(--text-primary);
+				margin-bottom: 8px;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				animation: pixelTitleFlicker 3s steps(12, end) infinite;
+			}
+
+			@keyframes pixelTitleFlicker {
+
+				0%,
+				90% {
+					color: var(--text-primary);
+				}
+
+				91%,
+				95% {
+					color: var(--primary-green);
+				}
+
+				96%,
+				100% {
+					color: var(--text-primary);
+				}
+			}
+
+			.ai-game-pixel-achievement-subtitle {
+				font-size: 8px;
+				color: var(--text-secondary);
+				margin-bottom: 24px;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+
+			/* 像素盲盒 */
+			.ai-game-pixel-blindbox-container {
+				margin: 24px 0;
+				position: relative;
+			}
+
+			.ai-game-pixel-blindbox {
+				width: 96px;
+				height: 96px;
+				margin: 0 auto 16px;
+				position: relative;
+				cursor: pointer;
+				image-rendering: pixelated;
+			}
+
+			.ai-game-pixel-box-outer {
+				width: 100%;
+				height: 100%;
+				background: var(--darker-bg);
+				border: 4px solid var(--primary-green);
+				position: relative;
+				overflow: hidden;
+				animation: pixelBoxFloat 4s steps(16, end) infinite;
+			}
+
+			@keyframes pixelBoxFloat {
+
+				0%,
+				100% {
+					transform: translateY(0px);
+				}
+
+				25% {
+					transform: translateY(-8px);
+				}
+
+				50% {
+					transform: translateY(0px);
+				}
+
+				75% {
+					transform: translateY(-4px);
+				}
+			}
+
+			.ai-game-pixel-box-inner {
+				position: absolute;
+				top: 8px;
+				left: 8px;
+				right: 8px;
+				bottom: 8px;
+				background: var(--card-bg);
+				border: 2px solid var(--border-color);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.ai-game-pixel-box-content {
+				font-size: 32px;
+				/* animation: pixelContentSpin 2s steps(8, end) infinite; */
+			}
+
+/* 			@keyframes pixelContentSpin {
+				0% {
+					transform: rotate(0deg) scale(1);
+				}
+
+				25% {
+					transform: rotate(90deg) scale(1.1);
+				}
+
+				50% {
+					transform: rotate(180deg) scale(1);
+				}
+
+				75% {
+					transform: rotate(270deg) scale(1.1);
+				}
+
+				100% {
+					transform: rotate(360deg) scale(1);
+				}
+			} */
+
+			.ai-game-pixel-box-shine {
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: repeating-linear-gradient(90deg,
+						transparent 0px,
+						rgba(255, 255, 255, 0.6) 4px,
+						transparent 8px);
+				animation: pixelShine 3s steps(16, end) infinite;
+			}
+
+			@keyframes pixelShine {
+				0% {
+					left: -100%;
+				}
+
+				100% {
+					left: 100%;
+				}
+			}
+
+			.ai-game-pixel-box-text {
+				color: var(--text-secondary);
+				font-size: 8px;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+
+			/* 像素奖励网格 */
+			.ai-game-pixel-rewards-grid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 12px;
+				margin: 24px 0;
+				opacity: 0;
+				animation: pixelRewardsReveal 1s steps(8, end) 2s forwards;
+			}
+
+			@keyframes pixelRewardsReveal {
+				from {
+					opacity: 0;
+					transform: translateY(16px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.ai-game-pixel-reward-item {
+				background: var(--darker-bg);
+				border: 2px solid var(--border-color);
+				padding: 12px 8px;
+				text-align: center;
+				animation: pixelItemPop 0.8s steps(8, end) forwards;
+				transform: scale(0);
+				image-rendering: pixelated;
+				box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.5);
+			}
+
+			.ai-game-pixel-reward-item:nth-child(1) {
+				animation-delay: 2.1s;
+			}
+
+			.ai-game-pixel-reward-item:nth-child(2) {
+				animation-delay: 2.2s;
+			}
+
+			.ai-game-pixel-reward-item:nth-child(3) {
+				animation-delay: 2.3s;
+			}
+
+			.ai-game-pixel-reward-item:nth-child(4) {
+				animation-delay: 2.4s;
+			}
+
+			@keyframes pixelItemPop {
+				0% {
+					transform: scale(0);
+				}
+
+				50% {
+					transform: scale(1.2);
+				}
+
+				100% {
+					transform: scale(1);
+				}
+			}
+
+			.ai-game-pixel-reward-item:hover {
+				border-color: var(--primary-green);
+				transform: scale(1.1);
+				box-shadow: 4px 4px 0 0 rgba(0, 255, 136, 0.3);
+				transition: all 0.2s steps(4, end);
+			}
+
+			.ai-game-pixel-reward-icon {
+				font-size: 24px;
+				margin-bottom: 8px;
+				display: block;
+				animation: pixelIconBounce 2s steps(8, end) infinite;
+			}
+
+			@keyframes pixelIconBounce {
+
+				0%,
+				100% {
+					transform: translateY(0px);
+				}
+
+				50% {
+					transform: translateY(-4px);
+				}
+			}
+
+			.ai-game-pixel-reward-name {
+				font-size: 6px;
+				color: var(--text-secondary);
+				margin-bottom: 4px;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+
+			.ai-game-pixel-reward-amount {
+				font-size: 8px;
+				color: var(--primary-green);
+				font-weight: bold;
+				text-transform: uppercase;
+			}
+
+			/* 像素统计信息 */
+			.ai-game-pixel-stats-container {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 12px;
+				margin: 24px 0;
+				opacity: 0;
+				animation: pixelStatsReveal 1s steps(8, end) 2.5s forwards;
+			}
+
+			@keyframes pixelStatsReveal {
+				from {
+					opacity: 0;
+					transform: translateY(16px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.ai-game-pixel-stat-item {
+				text-align: center;
+				padding: 12px 8px;
+				background: rgba(0, 255, 136, 0.1);
+				border: 2px solid rgba(0, 255, 136, 0.3);
+				box-shadow: 2px 2px 0 0 rgba(0, 255, 136, 0.2);
+				image-rendering: pixelated;
+			}
+
+			.ai-game-pixel-stat-value {
+				font-size: 12px;
+				color: var(--primary-green);
+				display: block;
+				margin-bottom: 4px;
+				animation: pixelStatFlicker 1s steps(4, end) infinite;
+			}
+
+			@keyframes pixelStatFlicker {
+
+				0%,
+				75% {
+					opacity: 1;
+				}
+
+				76%,
+				100% {
+					opacity: 0.7;
+				}
+			}
+
+			.ai-game-pixel-stat-label {
+				font-size: 6px;
+				color: var(--text-secondary);
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+
+			/* 像素按钮 */
+			.ai-game-pixel-action-buttons {
+				display: flex;
+				gap: 12px;
+				margin-top: 24px;
+				opacity: 0;
+				animation: pixelButtonsReveal 1s steps(8, end) 3s forwards;
+			}
+
+			@keyframes pixelButtonsReveal {
+				from {
+					opacity: 0;
+					transform: translateY(16px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.ai-game-pixel-btn {
+				flex: 1;
+				height: 40px;
+				border: none;
+				font-family: 'Press Start 2P', monospace;
+				font-size: 8px;
+				cursor: pointer;
+				transition: all 0.3s steps(4, end);
+				position: relative;
+				overflow: hidden;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				image-rendering: pixelated;
+			}
+
+			.ai-game-pixel-btn-primary {
+				background: var(--primary-green);
+				color: var(--dark-bg);
+				border: 2px solid var(--primary-green);
+				box-shadow:
+					0 0 0 2px var(--dark-bg),
+					0 0 0 4px var(--primary-green),
+					4px 4px 0 0 rgba(0, 255, 136, 0.4);
+			}
+
+			.ai-game-pixel-btn-secondary {
+				background: transparent;
+				color: var(--primary-green);
+				border: 2px solid var(--primary-green);
+				box-shadow:
+					0 0 0 2px var(--dark-bg),
+					0 0 0 4px var(--primary-green),
+					4px 4px 0 0 rgba(0, 255, 136, 0.2);
+			}
+
+			.ai-game-pixel-btn::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: repeating-linear-gradient(90deg,
+						transparent 0px,
+						rgba(255, 255, 255, 0.4) 2px,
+						transparent 4px);
+				animation: pixelBtnScan 2s steps(16, end) infinite;
+			}
+
+			@keyframes pixelBtnScan {
+				0% {
+					left: -100%;
+				}
+
+				100% {
+					left: 100%;
+				}
+			}
+
+			.ai-game-pixel-btn:hover {
+				transform: translate(-2px, -2px);
+			}
+
+			.ai-game-pixel-btn-primary:hover {
+				box-shadow:
+					0 0 0 2px var(--dark-bg),
+					0 0 0 4px var(--primary-green),
+					6px 6px 0 0 rgba(0, 255, 136, 0.6);
+			}
+
+			.ai-game-pixel-btn-secondary:hover {
+				background: var(--primary-green);
+				color: var(--dark-bg);
+			}
+
+			.ai-game-pixel-btn:active {
+				transform: translate(0px, 0px);
+			}
+
+			/* 像素爆炸效果 */
+			.ai-game-pixel-explosion {
+				position: fixed;
+				pointer-events: none;
+				z-index: 9999;
+				image-rendering: pixelated;
+			}
+
+			/* 响应式 */
+			@media (max-width: 480px) {
+				.ai-game-reward-modal {
+					width: 95vw;
+					margin: 20px;
+				}
+
+				.ai-game-modal-content {
+					padding: 24px 16px 16px;
+				}
+
+				.ai-game-pixel-rewards-grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+
+				.ai-game-pixel-action-buttons {
+					flex-direction: column;
+				}
+
+				.ai-game-pixel-achievement-title {
+					font-size: 12px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 像素网格背景 -->
+		<div class="pixel-grid"></div>
+
+		<!-- 像素粒子容器 -->
+		<div class="pixel-particles-container" id="pixelParticles"></div>
+
+		<!-- 像素光芒效果 -->
+		<div class="pixel-rays-container" id="pixelRays"></div>
+
+		<!-- 模态框 -->
+		<div class="ai-game-modal-overlay">
+			<div class="ai-game-reward-modal">
+				<!-- 像素边框装饰 -->
+				<div class="ai-game-pixel-border-animated"></div>
+				<div class="ai-game-pixel-corner top-left"></div>
+				<div class="ai-game-pixel-corner top-right"></div>
+				<div class="ai-game-pixel-corner bottom-left"></div>
+				<div class="ai-game-pixel-corner bottom-right"></div>
+
+				<!-- 关闭按钮 -->
+				<button class="ai-game-modal-close">×</button>
+
+				<!-- 内容 -->
+				<div class="ai-game-modal-content">
+					<!-- 像素成就标志 -->
+					<div class="ai-game-pixel-achievement-badge">Mission Complete</div>
+					<h2 class="ai-game-pixel-achievement-title">Blind Box Unlocked!</h2>
+					<p class="ai-game-pixel-achievement-subtitle">AI Memory Core Acquired</p>
+
+					<!-- 像素盲盒 -->
+					<div class="ai-game-pixel-blindbox-container">
+						<div class="ai-game-pixel-blindbox" id="pixelBlindbox">
+							<div class="ai-game-pixel-box-outer">
+								<div class="ai-game-pixel-box-shine"></div>
+								<div class="ai-game-pixel-box-inner">
+									<div class="ai-game-pixel-box-content" id="pixelBoxContent">📦</div>
+								</div>
+							</div>
+						</div>
+						<div class="ai-game-pixel-box-text" id="pixelBoxText">Press Space to Open</div>
+					</div>
+
+					<!-- 像素奖励展示 -->
+					<div class="ai-game-pixel-rewards-grid" id="pixelRewards">
+						<div class="ai-game-pixel-reward-item">
+							<span class="ai-game-pixel-reward-icon">💎</span>
+							<div class="ai-game-pixel-reward-name">Crystals</div>
+							<div class="ai-game-pixel-reward-amount">+250</div>
+						</div>
+						<div class="ai-game-pixel-reward-item">
+							<span class="ai-game-pixel-reward-icon">🧠</span>
+							<div class="ai-game-pixel-reward-name">Memory</div>
+							<div class="ai-game-pixel-reward-amount">+1</div>
+						</div>
+						<div class="ai-game-pixel-reward-item">
+							<span class="ai-game-pixel-reward-icon">⚡</span>
+							<div class="ai-game-pixel-reward-name">Energy</div>
+							<div class="ai-game-pixel-reward-amount">+50</div>
+						</div>
+						<div class="ai-game-pixel-reward-item">
+							<span class="ai-game-pixel-reward-icon">🎮</span>
+							<div class="ai-game-pixel-reward-name">XP</div>
+							<div class="ai-game-pixel-reward-amount">+100</div>
+						</div>
+					</div>
+
+					<!-- 像素统计信息 -->
+					<div class="ai-game-pixel-stats-container">
+						<div class="ai-game-pixel-stat-item">
+							<span class="ai-game-pixel-stat-value" id="pixelTotalBoxes">12</span>
+							<span class="ai-game-pixel-stat-label">Total Boxes</span>
+						</div>
+						<div class="ai-game-pixel-stat-item">
+							<span class="ai-game-pixel-stat-value" id="pixelStreak">7</span>
+							<span class="ai-game-pixel-stat-label">Day Streak</span>
+						</div>
+						<div class="ai-game-pixel-stat-item">
+							<span class="ai-game-pixel-stat-value" id="pixelLevel">15</span>
+							<span class="ai-game-pixel-stat-label">AI Level</span>
+						</div>
+					</div>
+
+					<!-- 像素操作按钮 -->
+					<div class="ai-game-pixel-action-buttons">
+						<button class="ai-game-pixel-btn pixel-btn-secondary" id="pixelShareBtn">Share Victory</button>
+						<button class="ai-game-pixel-btn pixel-btn-primary" id="pixelContinueBtn">Continue Quest</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// 创建像素粒子爆炸效果
+			function createPixelExplosion(x, y) {
+				const colors = ['#00ff88', '#00d4ff', '#8b5cf6', '#ffd700'];
+				const container = document.getElementById('pixelParticles');
+
+				for (let i = 0; i < 24; i++) {
+					const particle = document.createElement('div');
+					particle.className = 'pixel-particle';
+
+					// 创建像素化的正方形粒子
+					const size = [8, 12, 16][Math.floor(Math.random() * 3)];
+					particle.style.width = size + 'px';
+					particle.style.height = size + 'px';
+					particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+					particle.style.left = x + 'px';
+					particle.style.top = y + 'px';
+
+					// 像素化的移动方向（8方向）
+					const directions = [{
+							x: 0,
+							y: -1
+						}, {
+							x: 1,
+							y: -1
+						}, {
+							x: 1,
+							y: 0
+						}, {
+							x: 1,
+							y: 1
+						},
+						{
+							x: 0,
+							y: 1
+						}, {
+							x: -1,
+							y: 1
+						}, {
+							x: -1,
+							y: 0
+						}, {
+							x: -1,
+							y: -1
+						}
+					];
+					const direction = directions[i % 8];
+					const velocity = Math.random() * 80 + 40;
+
+					const endX = x + direction.x * velocity;
+					const endY = y + direction.y * velocity;
+
+					particle.style.setProperty('--end-x', endX + 'px');
+					particle.style.setProperty('--end-y', endY + 'px');
+
+					container.appendChild(particle);
+
+					setTimeout(() => {
+						if (particle.parentNode) {
+							particle.parentNode.removeChild(particle);
+						}
+					}, 2000);
+				}
+			}
+
+			// 创建像素光芒
+			function createPixelRays() {
+				const container = document.getElementById('pixelRays');
+				for (let i = 0; i < 12; i++) {
+					const ray = document.createElement('div');
+					ray.className = 'pixel-ray';
+					ray.style.transform = `rotate(${i * 30}deg) translateY(-40px)`;
+					ray.style.animationDelay = i * 0.1 + 's';
+					container.appendChild(ray);
+				}
+			}
+
+			// 像素盲盒开启动画
+			function openPixelBlindBox() {
+				const blindbox = document.getElementById('pixelBlindbox');
+				const boxContent = document.getElementById('pixelBoxContent');
+				const boxText = document.getElementById('pixelBoxText');
+
+				// 禁用点击
+				blindbox.style.pointerEvents = 'none';
+				boxText.textContent = 'Opening...';
+
+				// 像素化震动效果
+				let shakeCount = 0;
+				const shakeDirections = [{
+					x: 0,
+					y: -4
+				}, {
+					x: 4,
+					y: 0
+				}, {
+					x: 0,
+					y: 4
+				}, {
+					x: -4,
+					y: 0
+				}];
+
+				const shakeInterval = setInterval(() => {
+					const direction = shakeDirections[shakeCount % 4];
+					blindbox.style.transform = `translate(${direction.x}px, ${direction.y}px) scale(1.1)`;
+					shakeCount++;
+
+					if (shakeCount > 12) {
+						clearInterval(shakeInterval);
+
+						// 像素爆炸效果
+						const rect = blindbox.getBoundingClientRect();
+						const centerX = rect.left + rect.width / 2;
+						const centerY = rect.top + rect.height / 2;
+
+						createPixelExplosion(centerX, centerY);
+
+						// 改变盒子内容
+						setTimeout(() => {
+							boxContent.textContent = '✨';
+							blindbox.style.transform = 'scale(1)';
+							blindbox.style.animation = 'pixelBoxFloat 4s steps(16, end) infinite';
+							boxText.textContent = 'Opened!';
+
+							// 显示奖励
+							const rewards = document.getElementById('pixelRewards');
+							rewards.style.opacity = '1';
+
+							// 像素化数字递增
+							animatePixelNumbers();
+
+							// 屏幕闪烁效果
+							document.body.style.filter = 'brightness(1.5) contrast(1.2)';
+							setTimeout(() => {
+								document.body.style.filter = '';
+							}, 200);
+
+						}, 500);
+					}
+				}, 150);
+			}
+
+			// 像素化数字递增动画
+			function animatePixelNumbers() {
+				const stats = [{
+						element: document.getElementById('pixelTotalBoxes'),
+						target: 12
+					},
+					{
+						element: document.getElementById('pixelStreak'),
+						target: 7
+					},
+					{
+						element: document.getElementById('pixelLevel'),
+						target: 15
+					}
+				];
+
+				stats.forEach(stat => {
+					let current = 0;
+					const timer = setInterval(() => {
+						current++;
+						stat.element.textContent = current;
+
+						// 像素化闪烁效果
+						stat.element.style.color = current % 2 === 0 ? 'var(--primary-green)' :
+							'var(--primary-cyan)';
+
+						if (current >= stat.target) {
+							clearInterval(timer);
+							stat.element.style.color = 'var(--primary-green)';
+						}
+					}, 100);
+				});
+			}
+
+			// 像素按钮点击效果
+			function pixelButtonClick(button) {
+				button.style.transform = 'translate(2px, 2px)';
+				button.style.filter = 'brightness(1.3)';
+
+				setTimeout(() => {
+					button.style.transform = '';
+					button.style.filter = '';
+				}, 150);
+			}
+
+			// 按钮事件
+			document.getElementById('pixelShareBtn').addEventListener('click', () => {
+				const btn = document.getElementById('pixelShareBtn');
+				pixelButtonClick(btn);
+
+				btn.textContent = 'Shared!';
+				btn.style.background = 'var(--primary-green)';
+				btn.style.color = 'var(--dark-bg)';
+
+				// 创建分享特效
+				const rect = btn.getBoundingClientRect();
+				createPixelExplosion(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+				setTimeout(() => {
+					btn.textContent = 'Share Victory';
+					btn.style.background = 'transparent';
+					btn.style.color = 'var(--primary-green)';
+				}, 2000);
+			});
+
+			document.getElementById('pixelContinueBtn').addEventListener('click', () => {
+				const btn = document.getElementById('pixelContinueBtn');
+				pixelButtonClick(btn);
+
+				const modal = document.querySelector('.ai-game-modal-overlay');
+				modal.style.animation = 'pixelOverlayFadeOut 0.8s steps(8, end) forwards';
+
+				setTimeout(() => {
+					console.log('Continue to next quest');
+				}, 800);
+			});
+
+			// 关闭按钮
+			document.querySelector('.ai-game-modal-close').addEventListener('click', () => {
+				const modal = document.querySelector('.ai-game-modal-overlay');
+				modal.style.animation = 'pixelOverlayFadeOut 0.8s steps(8, end) forwards';
+			});
+
+			// 盲盒点击事件
+			document.getElementById('pixelBlindbox').addEventListener('click', openPixelBlindBox);
+
+			// 添加fadeOut动画
+			const style = document.createElement('style');
+			style.textContent = `
+            @keyframes pixelOverlayFadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+			document.head.appendChild(style);
+
+			// 键盘事件
+			document.addEventListener('keydown', (e) => {
+				if (e.code === 'Space') {
+					e.preventDefault();
+					if (document.getElementById('pixelBlindbox').style.pointerEvents !== 'none') {
+						openPixelBlindBox();
+					}
+				} else if (e.code === 'Enter') {
+					document.getElementById('pixelContinueBtn').click();
+				} else if (e.code === 'Escape') {
+					document.querySelector('.modal-close').click();
+				}
+			});
+
+			// 创建背景粒子
+			function createBackgroundPixelParticles() {
+				const container = document.getElementById('pixelParticles');
+				for (let i = 0; i < 15; i++) {
+					const particle = document.createElement('div');
+					particle.style.position = 'absolute';
+					particle.style.width = Math.random() * 8 + 4 + 'px';
+					particle.style.height = particle.style.width;
+					particle.style.background = ['#00ff88', '#00d4ff', '#8b5cf6'][Math.floor(Math.random() * 3)];
+					particle.style.left = Math.random() * 100 + '%';
+					particle.style.top = '100%';
+					particle.style.opacity = '0.6';
+					particle.style.imageRendering = 'pixelated';
+					particle.style.animation = `pixelParticleFloat ${Math.random() * 3 + 4}s linear infinite`;
+					particle.style.animationDelay = Math.random() * 2 + 's';
+					container.appendChild(particle);
+
+					setTimeout(() => {
+						if (particle.parentNode) {
+							particle.parentNode.removeChild(particle);
+						}
+					}, 8000);
+				}
+			}
+
+			// 初始化
+			document.addEventListener('DOMContentLoaded', () => {
+				createPixelRays();
+				createBackgroundPixelParticles();
+
+				// 定期创建背景粒子
+				setInterval(createBackgroundPixelParticles, 3000);
+
+				// 初始爆炸效果
+				setTimeout(() => {
+					createPixelExplosion(window.innerWidth / 2, window.innerHeight / 2);
+				}, 1000);
+
+				// 像素化音效模拟
+				console.log('🎵 8-bit reward system activated!');
+			});
+
+			// 像素化悬停效果
+			document.querySelectorAll('.ai-game-pixel-reward-item, .ai-game-pixel-btn, .ai-game-pixel-stat-item').forEach(element => {
+				element.addEventListener('mouseenter', () => {
+					element.style.filter = 'brightness(1.2) contrast(1.1)';
+				});
+
+				element.addEventListener('mouseleave', () => {
+					element.style.filter = '';
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>AI BLIND BOX UNIVERSE</title>
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/login.css" rel="stylesheet">
+		<link rel="icon" href="favicon.ico">
+		<script>
+			window.addEventListener('message', function (event) {
+				if (event.data && event.data.type === 'AUTH_TOKEN') {
+					const authToken = event.data.token;
+					console.log('收到父页面传递的token:', authToken);
+					// 使用该token进行后续操作
+					localStorage.setItem('admin-element-vue-token', authToken);
+				}
+			}, false);
+		</script>
+	</head>
+	<body>
+		<!-- popup -->
+		<div id="myModal" class="modal">
+			<!-- popup content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<p id="modalText"></p>
+			</div>
+		</div>
+		<!-- pixel-popup -->
+		<div id="pixel-myModal" class="modal">
+			<!-- popup content -->
+			<div class="modal-content">
+				<span class="close" id="pixel-close">&times;</span>
+				<p id="pixel-modalText"></p>
+			</div>
+		</div>
+
+		<!-- Space Stars Background -->
+		<div class="stars-bg" id="starsBg"></div>
+
+		<!-- Background Decoration Elements -->
+		<div class="bg-decorations" id="bgDecorations"></div>
+
+		<!-- Top Navigation -->
+		<nav class="top-nav">
+
+			<div class="nav-container">
+				<img style="width: 80px;" src="statics/logo.png" />
+				<ul class="nav-links">
+					<li><a href="javascript:void(0)" onclick="location.reload();">Home</a></li>
+					<li><a href="javascript:void(0)" id="show-pop1">Blind Boxes</a></li>
+					<li><a href="#community">Community</a></li>
+					<li><a href="javascript:void(0)" class="nav-team" data-path="team">Team</a></li>
+				</ul>
+				<div class="cta-buttons">
+					<button class="btn-wallet" id="show-pop2">
+						<div class="btn-wallet-text-1">💼</div>
+						<div class="btn-wallet-text-2">Connect Wallet</div>
+					</button>
+					<button class="btn-enter" onclick="loginOrNavigate()">
+						<div class="btn-wallet-text-1">🚀</div>
+						<div class="btn-wallet-text-2">ENTER UNIVERSE</div>
+					</button>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Level Progress Bar changed to Path Selector -->
+		<div class="level-progress">
+			<div class="progress-bar">
+				<div class="level-dot active" data-level="0">🗺️</div>
+				<div class="progress-line"></div>
+				<div class="path-selector" data-path="player">🎮</div>
+				<div class="progress-line"></div>
+				<div class="path-selector" data-path="investor">💰</div>
+				<div class="progress-line"></div>
+				<div class="path-selector" data-path="team">👥</div>
+				<div class="progress-line"></div>
+				<div class="level-dot active2" data-level="final">🚀</div>
+			</div>
+			<div
+				style="text-align: center; margin-top: 15px; font-family: var(--pixel-font); font-size: 10px; color: var(--neon-cyan);">
+				Choose Your Exploration Path | Select Your Journey
+			</div>
+		</div>
+
+		<!-- Main Content -->
+		<main class="main-content">
+
+			<!-- Level 0: Universe Overview -->
+			<section class="level-container" id="level-0">
+				<div class="particles"></div>
+				<div class="level-content">
+					<h1 class="level-title">AI BLIND BOX UNIVERSE</h1>
+					<p class="level-subtitle">Every Blind Box is a Living AI Companion | Collect, Play, Earn on Solana
+					</p>
+
+					<!-- Core Value Proposition -->
+					<div
+						style="background: linear-gradient(45deg, var(--neon-yellow), var(--neon-pink), var(--neon-cyan)); padding: 3px; margin: 40px auto; max-width: 800px; border-radius: 10px;">
+						<div style="background: var(--ui-dark); padding: 30px; text-align: center; border-radius: 7px;">
+							<h3
+								style="font-family: var(--pixel-font); color: var(--neon-yellow); font-size: 20px; margin-bottom: 15px;">
+								⚡ Understand Us in 30 Seconds</h3>
+							<p style="color: white; font-size: 18px; line-height: 1.6;">
+								<span style="color: var(--neon-cyan);">Problem</span>: 90% of NFTs become useless after
+								minting<br>
+								<span style="color: var(--neon-pink);">Solution</span>: AI makes every blind box
+								interactive, playable, and profitable<br>
+								<span style="color: var(--neon-yellow);">Result</span>: Players have fun, holders earn
+								rewards
+							</p>
+						</div>
+					</div>
+
+					<!-- Exploration Path Selection -->
+					<div
+						style="background: var(--ui-dark); border: 3px solid var(--neon-purple); padding: 40px; margin: 40px 0; border-radius: 10px;">
+						<h3
+							style="font-family: var(--pixel-font); color: var(--neon-purple); text-align: center; margin-bottom: 30px;">
+							🎮 Choose Your Exploration Path</h3>
+
+						<div
+							style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+							<!-- Player Experience Path -->
+							<div class="path-card" data-path="player"
+								style="background: var(--ui-darker); border: 3px solid var(--neon-cyan); padding: 25px; text-align: center; cursor: pointer; transition: all 0.3s ease; border-radius: 8px;">
+								<div style="font-size: 40px; margin-bottom: 15px;">🎮</div>
+								<h4
+									style="font-family: var(--pixel-font); color: var(--neon-cyan); margin-bottom: 10px;">
+									Player Experience</h4>
+								<p style="color: #ccc; font-size: 14px;">Want to know how to play?<br>Experience AI
+									companion interactions</p>
+							</div>
+
+							<!-- Investment Opportunity Path -->
+							<div class="path-card" data-path="investor"
+								style="background: var(--ui-darker); border: 3px solid var(--neon-yellow); padding: 25px; text-align: center; cursor: pointer; transition: all 0.3s ease; border-radius: 8px;">
+								<div style="font-size: 40px; margin-bottom: 15px;">💰</div>
+								<h4
+									style="font-family: var(--pixel-font); color: var(--neon-yellow); margin-bottom: 10px;">
+									Investment Opportunity</h4>
+								<p style="color: #ccc; font-size: 14px;">Understand market value?<br>Check business data
+								</p>
+							</div>
+
+							<!-- Team Story Path -->
+							<div class="path-card" data-path="team"
+								style="background: var(--ui-darker); border: 3px solid var(--neon-pink); padding: 25px; text-align: center; cursor: pointer; transition: all 0.3s ease; border-radius: 8px;">
+								<div style="font-size: 40px; margin-bottom: 15px;">👥</div>
+								<h4
+									style="font-family: var(--pixel-font); color: var(--neon-pink); margin-bottom: 10px;">
+									Team Story</h4>
+								<p style="color: #ccc; font-size: 14px;">Want to meet us?<br>Learn our journey</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Quick Action Area -->
+					<div style="display: flex; justify-content: center; gap: 30px; margin: 40px 0; flex-wrap: wrap;">
+						<button class="btn-enter" style="padding: 15px 30px; font-size: 16px;">
+							📦 Experience Now
+						</button>
+						<button class="btn-enter"
+							style="padding: 15px 30px; font-size: 16px; border-color: var(--neon-cyan); color: var(--neon-cyan);">
+							👥 Join Community
+						</button>
+					</div>
+
+					<p style="color: #666; font-size: 14px; margin-top: 30px;">
+						💡 Choose a path for deep exploration, or start experiencing directly
+					</p>
+				</div>
+			</section>
+
+			<!-- Player Experience Path -->
+			<section class="level-container hidden" id="path-player">
+				<div class="level-content">
+					<h1 class="level-title">🎮 Player Experience</h1>
+					<p class="level-subtitle">As a Web3 OG, you definitely want to know how this actually works</p>
+
+					<!-- AI Interaction Demo -->
+					<div class="game-demo">
+						<div class="game-screen">
+							<div class="game-dogs">
+								<img src="statics/7.png">
+								<img src="statics/6.png">
+								<img src="statics/5.png">
+							</div>
+							<div class="game-button">
+								<div class="game-button-text">PRESS SPACE TO PLAY · INSERT VIDEO HERE</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div id="gameResult"
+						style="display: none; margin-top: 30px; padding: 20px; background: var(--ui-dark); border: 3px solid var(--neon-cyan);">
+						<p style="font-family: var(--pixel-font); color: var(--neon-cyan);">🎉 Interaction Ready!</p>
+						<p style="margin-top: 10px;">Demo area is prepared for new content integration.</p>
+					</div>
+
+					<!-- Game Mechanics Explanation -->
+					<div class="feature-grid">
+						<div class="feature-card" style="border-color: var(--neon-cyan);">
+							<div class="feature-icon"
+								style="background: var(--neon-cyan); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+								<div style="font-size: 40px;">🤖</div>
+								<div style="color: var(--ui-dark); font-family: var(--pixel-font); font-size: 14px;">AI
+								</div>
+							</div>
+							<h3>Real AI Interaction</h3>
+							<p>Each blind box has unique personality<br>Remembers conversations with you<br>Gets smarter
+								with more interaction</p>
+						</div>
+
+						<div class="feature-card" style="border-color: var(--neon-yellow);">
+							<div class="feature-icon"
+								style="background: var(--neon-yellow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+								<div style="font-size: 40px;">🎮</div>
+								<div style="color: var(--ui-dark); font-family: var(--pixel-font); font-size: 14px;">
+									PLAY</div>
+							</div>
+							<h3>Multiple Game Modes</h3>
+							<p>Chat challenges, trivia games<br>Creative contests, social interactions<br>New gameplay
+								every day</p>
+						</div>
+
+						<div class="feature-card" style="border-color: var(--neon-pink);">
+							<div class="feature-icon"
+								style="background: var(--neon-pink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+								<div style="font-size: 40px;">💰</div>
+								<div style="color: var(--ui-dark); font-family: var(--pixel-font); font-size: 14px;">
+									EARN</div>
+							</div>
+							<h3>Dual Reward System</h3>
+							<p>Players: Win SOL tokens<br>Holders: Get 30% revenue share<br>Automatic on-chain
+								settlement</p>
+						</div>
+					</div>
+
+					<div style="text-align: center; margin: 40px 0;">
+						<button class="btn-enter" onclick="goToLevel(0)" style="margin-right: 20px;">
+							← Back to Overview
+						</button>
+						<button class="btn-enter" style="padding: 15px 30px;">
+							🚀 Start Playing
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<!-- Investment Opportunity Path -->
+			<section class="level-container hidden" id="path-investor">
+				<div class="level-content">
+					<h1 class="level-title">💰 Investment Opportunity</h1>
+					<p class="level-subtitle">Data doesn't lie, let's see how big this market is</p>
+
+					<!-- Market Opportunity Analysis -->
+					<div
+						style="display: flex; justify-content: space-between; align-items: center; margin: 60px 0; flex-wrap: wrap; gap: 30px;">
+						<div style="flex: 1; min-width: 200px;">
+							<div
+								style="background: var(--ui-dark); border: 4px solid #666; padding: 30px; text-align: center;">
+								<h3 style="font-family: var(--pixel-font); color: #666; font-size: 16px;">Traditional
+									Collectibles</h3>
+								<div
+									style="font-size: 32px; color: #666; font-family: var(--pixel-font); margin: 10px 0;">
+									$300B</div>
+								<p style="color: #999; font-size: 12px;">Physical + Digital, Limited Interaction</p>
+							</div>
+						</div>
+
+						<div
+							style="font-size: 40px; color: var(--neon-yellow); display: flex; align-items: center; height: 120px; flex-shrink: 0;">
+							→</div>
+
+						<div style="flex: 1; min-width: 200px;">
+							<div
+								style="background: var(--ui-dark); border: 4px solid var(--neon-cyan); padding: 30px; text-align: center; position: relative;">
+								<div
+									style="position: absolute; top: -10px; right: -10px; background: var(--neon-yellow); color: var(--ui-dark); padding: 5px 10px; font-family: var(--pixel-font); font-size: 10px;">
+									Blue Ocean!</div>
+								<h3 style="font-family: var(--pixel-font); color: var(--neon-cyan); font-size: 16px;">
+									Playable NFTs</h3>
+								<div
+									style="font-size: 32px; color: var(--neon-cyan); font-family: var(--pixel-font); margin: 10px 0;">
+									$942B</div>
+								<p style="color: #ccc; font-size: 12px;">Full Gameplay, Immersive Experience</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Business Model -->
+					<div
+						style="background: linear-gradient(45deg, var(--neon-yellow), var(--neon-pink)); padding: 3px; margin: 40px auto; max-width: 800px;">
+						<div style="background: var(--ui-dark); padding: 30px; text-align: center;">
+							<h3
+								style="font-family: var(--pixel-font); color: var(--neon-yellow); font-size: 24px; margin-bottom: 20px;">
+								💡 Business Model</h3>
+							<div
+								style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+								<div>
+									<h4 style="color: var(--neon-cyan); margin-bottom: 10px;">Player Payments</h4>
+									<p style="color: #ccc; font-size: 14px;">In-game purchases, item
+										upgrades<br>Competition and challenge entries</p>
+								</div>
+								<div>
+									<h4 style="color: var(--neon-pink); margin-bottom: 10px;">Holder Revenue Share</h4>
+									<p style="color: #ccc; font-size: 14px;">30% revenue auto-distributed<br>Smart
+										contract guaranteed transparency</p>
+								</div>
+								<div>
+									<h4 style="color: var(--neon-yellow); margin-bottom: 10px;">Platform Fees</h4>
+									<p style="color: #ccc; font-size: 14px;">Transaction fees, premium
+										features<br>Sustainable ecosystem growth</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Development Roadmap -->
+					<div
+						style="display: flex; justify-content: space-between; align-items: flex-start; margin: 60px 0; flex-wrap: wrap; gap: 30px;">
+						<div style="flex: 1; min-width: 280px;">
+							<div
+								style="background: var(--ui-dark); border: 4px solid var(--neon-cyan); padding: 25px; height: 100%; position: relative;">
+								<div
+									style="position: absolute; top: -15px; left: 20px; background: var(--neon-cyan); color: var(--ui-dark); padding: 5px 15px; font-family: var(--pixel-font); font-size: 10px; border-radius: 3px;">
+									PHASE 1</div>
+								<h3
+									style="font-family: var(--pixel-font); color: var(--neon-cyan); font-size: 16px; margin-bottom: 15px;">
+									2025 Q2-Q4</h3>
+								<div style="margin-bottom: 20px;">
+									<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+										<span style="font-family: var(--pixel-font); font-size: 11px;">Top Interactive
+											AI Platform</span>
+										<span
+											style="color: var(--neon-cyan); font-family: var(--pixel-font); font-size: 10px;">50%
+											Complete</span>
+									</div>
+									<div style="background: #333; height: 8px; margin-bottom: 15px;">
+										<div style="background: var(--neon-cyan); height: 100%; width: 50%;"></div>
+									</div>
+								</div>
+								<ul style="color: #ccc; line-height: 1.6; font-size: 13px;">
+									<li>• Basic AI character interaction</li>
+									<li>• Blind box minting system</li>
+									<li>• Game mechanics launch</li>
+									<li>• Target: 100K MAU</li>
+								</ul>
+							</div>
+						</div>
+
+						<div style="flex: 1; min-width: 280px;">
+							<div
+								style="background: var(--ui-dark); border: 4px solid var(--neon-purple); padding: 25px; height: 100%; position: relative;">
+								<div
+									style="position: absolute; top: -15px; left: 20px; background: var(--neon-purple); color: var(--ui-dark); padding: 5px 15px; font-family: var(--pixel-font); font-size: 10px; border-radius: 3px;">
+									PHASE 2</div>
+								<h3
+									style="font-family: var(--pixel-font); color: var(--neon-purple); font-size: 16px; margin-bottom: 15px;">
+									2026</h3>
+								<div style="margin-bottom: 20px;">
+									<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+										<span style="font-family: var(--pixel-font); font-size: 11px;">UGC
+											Economy</span>
+										<span
+											style="color: var(--neon-purple); font-family: var(--pixel-font); font-size: 10px;">30%
+											Complete</span>
+									</div>
+									<div style="background: #333; height: 8px; margin-bottom: 15px;">
+										<div style="background: var(--neon-purple); height: 100%; width: 30%;"></div>
+									</div>
+								</div>
+								<ul style="color: #ccc; line-height: 1.6; font-size: 13px;">
+									<li>• User-generated boxes via AI tools</li>
+									<li>• UGC creation platform</li>
+									<li>• Community governance system</li>
+									<li>• Creator economy launch</li>
+								</ul>
+							</div>
+						</div>
+
+						<div style="flex: 1; min-width: 280px;">
+							<div
+								style="background: var(--ui-dark); border: 4px solid var(--neon-yellow); padding: 25px; height: 100%; position: relative;">
+								<div
+									style="position: absolute; top: -15px; left: 20px; background: var(--neon-yellow); color: var(--ui-dark); padding: 5px 15px; font-family: var(--pixel-font); font-size: 10px; border-radius: 3px;">
+									PHASE 3</div>
+								<h3
+									style="font-family: var(--pixel-font); color: var(--neon-yellow); font-size: 16px; margin-bottom: 15px;">
+									2027</h3>
+								<div style="margin-bottom: 20px;">
+									<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+										<span style="font-family: var(--pixel-font); font-size: 11px;">Cross-Platform AI
+											Characters</span>
+										<span
+											style="color: var(--neon-yellow); font-family: var(--pixel-font); font-size: 10px;">10%
+											Complete</span>
+									</div>
+									<div style="background: #333; height: 8px; margin-bottom: 15px;">
+										<div style="background: var(--neon-yellow); height: 100%; width: 10%;"></div>
+									</div>
+								</div>
+								<ul style="color: #ccc; line-height: 1.6; font-size: 13px;">
+									<li>• Games/Social apps integration</li>
+									<li>• Multi-platform AI companions</li>
+									<li>• Cross-chain interoperability</li>
+									<li>• Global ecosystem development</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- Key Metrics -->
+					<div
+						style="background: var(--ui-dark); border: 3px solid var(--neon-purple); padding: 30px; margin: 40px 0;">
+						<h3
+							style="font-family: var(--pixel-font); color: var(--neon-purple); text-align: center; margin-bottom: 20px;">
+							📊 Key Metrics</h3>
+						<div
+							style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+							<div style="text-align: center;">
+								<div
+									style="font-family: var(--pixel-font); font-size: 24px; color: var(--neon-yellow);">
+									73%</div>
+								<div style="color: #ccc; font-size: 12px;">Solana users want playable NFTs</div>
+							</div>
+							<div style="text-align: center;">
+								<div style="font-family: var(--pixel-font); font-size: 24px; color: var(--neon-cyan);">
+									$200+</div>
+								<div style="color: #ccc; font-size: 12px;">Target user annual spending</div>
+							</div>
+							<div style="text-align: center;">
+								<div style="font-family: var(--pixel-font); font-size: 24px; color: var(--neon-pink);">
+									2M+</div>
+								<div style="color: #ccc; font-size: 12px;">Potential target users</div>
+							</div>
+						</div>
+					</div>
+
+					<div style="text-align: center; margin: 40px 0;">
+						<button class="btn-enter" onclick="goToLevel(0)" style="margin-right: 20px;">
+							← Back to Overview
+						</button>
+						<button class="btn-enter" style="padding: 15px 30px;">
+							📈 View Business Plan
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<!-- Team Story Path -->
+			<section class="level-container hidden" id="path-team">
+				<div class="level-content">
+					<h1 class="level-title">👥 Team Story</h1>
+					<p class="level-subtitle">Behind every great product, there's a group of interesting people</p>
+
+					<!-- Team Introduction -->
+					<div class="team-grid">
+						<div class="team-card">
+							<div class="team-avatar avatar-lumi">
+								<img src="statics/avatar/1.jpg"></img>
+							</div>
+							<h3 style="font-family: var(--pixel-font); color: var(--neon-purple); margin-bottom: 12px;">
+								LUMI</h3>
+							<p style="color: var(--neon-purple);">AGE 24 | INT 99</p>
+							<p style="margin-top: 10px; color: #ccc;">Web3 Geek & Blockchain Tech Expert<br>"Code
+								changes the world, I write code"</p>
+						</div>
+
+						<div class="team-card">
+							<div class="team-avatar avatar-michael">
+								<img src="statics/avatar/2.png"></img>
+							</div>
+							<h3 style="font-family: var(--pixel-font); color: var(--neon-cyan); margin-bottom: 12px;">
+								MICHAEL S</h3>
+							<p style="color: var(--neon-cyan);">AGE 23 | CRE 95</p>
+							<p style="margin-top: 10px; color: #ccc;">Story Architect & Creative Director<br>"Good
+								products need good stories"</p>
+						</div>
+
+						<div class="team-card">
+							<div class="team-avatar avatar-lynn">
+								<img src="statics/avatar/3.png"></img>
+							</div>
+							<h3 style="font-family: var(--pixel-font); color: var(--neon-yellow); margin-bottom: 12px;">
+								HERO LYNN</h3>
+							<p style="color: var(--neon-yellow);">AGE 23 | CRE 97</p>
+							<p style="margin-top: 10px; color: #ccc;">Visual Magician & UI/UX Designer<br>"Beauty is
+								productivity, design is magic"</p>
+						</div>
+					</div>
+
+					<!-- Startup Journey -->
+					<div style="margin: 60px 0;">
+						<h3
+							style="font-family: var(--pixel-font); color: var(--neon-pink); text-align: center; margin-bottom: 40px; font-size: 24px;">
+							🚀 Our Story</h3>
+
+						<div
+							style="display: flex; justify-content: space-around; align-items: flex-start; margin: 60px 0; flex-wrap: wrap; gap: 40px;">
+							<div style="text-align: center; flex: 1; min-width: 200px;">
+								<div
+									style="width: 150px; height: 150px; background: var(--ui-dark); border: 4px solid #666; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+									<div style="font-size: 60px; color: #666;">😤</div>
+								</div>
+								<h3 style="font-family: var(--pixel-font); color: #666; font-size: 14px;">Problem
+									Discovery</h3>
+								<p style="color: #999; margin-top: 10px; font-size: 14px;">"Bought 100 NFTs, 90% just
+									collecting dust in wallets after minting. This can't be the future of Web3!"</p>
+							</div>
+
+							<div
+								style="font-size: 40px; color: var(--neon-yellow); display: flex; align-items: center; height: 150px; flex-shrink: 0;">
+								→</div>
+
+							<div style="text-align: center; flex: 1; min-width: 200px;">
+								<div
+									style="width: 150px; height: 150px; background: var(--ui-dark); border: 4px solid var(--neon-cyan); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+									<div style="font-size: 60px; color: var(--neon-cyan);">💡</div>
+								</div>
+								<h3 style="font-family: var(--pixel-font); color: var(--neon-cyan); font-size: 14px;">
+									Inspiration Strike</h3>
+								<p style="color: #ccc; margin-top: 10px; font-size: 14px;">What can bring static NFTs to
+									life? AI! Every collectible should have its own "soul"</p>
+							</div>
+
+							<div
+								style="font-size: 40px; color: var(--neon-yellow); display: flex; align-items: center; height: 150px; flex-shrink: 0;">
+								→</div>
+
+							<div style="text-align: center; flex: 1; min-width: 200px;">
+								<div
+									style="width: 150px; height: 150px; background: var(--ui-dark); border: 4px solid var(--neon-yellow); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+									<div style="font-size: 60px; color: var(--neon-yellow);">🛠️</div>
+								</div>
+								<h3 style="font-family: var(--pixel-font); color: var(--neon-yellow); font-size: 14px;">
+									Taking Action</h3>
+								<p style="color: #ccc; margin-top: 10px; font-size: 14px;">6 months of prototype
+									development, countless sleepless nights, finally got our first talking AI blind box
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Vision & Mission -->
+					<div
+						style="background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink), var(--neon-cyan)); padding: 3px; margin: 40px 0; border-radius: 10px;">
+						<div style="background: var(--ui-dark); padding: 40px; text-align: center; border-radius: 7px;">
+							<h3
+								style="font-family: var(--pixel-font); color: var(--neon-yellow); font-size: 24px; margin-bottom: 20px;">
+								🌟 Our Vision</h3>
+							<p style="color: white; font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+								"Give life to every digital collectible, bring warmth to the virtual world"
+							</p>
+							<div
+								style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+								<div>
+									<h4
+										style="color: var(--neon-cyan); margin-bottom: 10px; font-family: var(--pixel-font);">
+										Healing</h4>
+									<p style="color: #ccc; font-size: 14px;">Provide warm companionship<br>in a
+										fast-paced world</p>
+								</div>
+								<div>
+									<h4
+										style="color: var(--neon-pink); margin-bottom: 10px; font-family: var(--pixel-font);">
+										Innovation</h4>
+									<p style="color: #ccc; font-size: 14px;">AI + Web3 + Gaming<br>Exploring digital
+										life boundaries</p>
+								</div>
+								<div>
+									<h4
+										style="color: var(--neon-yellow); margin-bottom: 10px; font-family: var(--pixel-font);">
+										Win-Win</h4>
+									<p style="color: #ccc; font-size: 14px;">Players, holders, platform<br>Everyone
+										benefits</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Team Values -->
+					<div
+						style="background: var(--ui-dark); border: 3px solid var(--neon-purple); padding: 30px; margin: 40px 0;">
+						<h3
+							style="font-family: var(--pixel-font); color: var(--neon-purple); text-align: center; margin-bottom: 20px;">
+							💎 Our Principles</h3>
+						<div
+							style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center;">
+							<div>
+								<div style="font-size: 30px; margin-bottom: 10px;">🎮</div>
+								<h4 style="color: var(--neon-cyan); font-family: var(--pixel-font); font-size: 12px;">
+									Fun First</h4>
+								<p style="color: #ccc; font-size: 12px; margin-top: 5px;">Fun is the first productivity
+								</p>
+							</div>
+							<div>
+								<div style="font-size: 30px; margin-bottom: 10px;">🔒</div>
+								<h4 style="color: var(--neon-yellow); font-family: var(--pixel-font); font-size: 12px;">
+									Security</h4>
+								<p style="color: #ccc; font-size: 12px; margin-top: 5px;">User asset security first</p>
+							</div>
+							<div>
+								<div style="font-size: 30px; margin-bottom: 10px;">🌱</div>
+								<h4 style="color: var(--neon-pink); font-family: var(--pixel-font); font-size: 12px;">
+									Sustainable</h4>
+								<p style="color: #ccc; font-size: 12px; margin-top: 5px;">Sustainable development model
+								</p>
+							</div>
+							<div>
+								<div style="font-size: 30px; margin-bottom: 10px;">🤝</div>
+								<h4 style="color: var(--neon-purple); font-family: var(--pixel-font); font-size: 12px;">
+									Community</h4>
+								<p style="color: #ccc; font-size: 12px; margin-top: 5px;">Community-driven development
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div style="text-align: center; margin: 40px 0;">
+						<button class="btn-enter" onclick="goToLevel(0)" style="margin-right: 20px;">
+							← Back to Overview
+						</button>
+						<button class="btn-enter" style="padding: 15px 30px;">
+							💌 Contact Us
+						</button>
+					</div>
+				</div>
+			</section>
+
+		</main>
+
+		<!-- Footer -->
+		<footer class="optimized-footer">
+			<div class="footer-content" id="community">
+				<div class="footer-section">
+					<div class="section-header">
+						<div class="section-icon">🎮</div>
+						<h3>Product Ecosystem</h3>
+					</div>
+					<ul>
+						<li><a href="#"><span class="link-icon">🕹️</span>How to Play</a></li>
+						<li><a href="#"><span class="link-icon">📦</span>Blind Box Market</a></li>
+						<li><a href="#"><span class="link-icon">🤖</span>AI Companion Hub</a></li>
+						<li><a href="#"><span class="link-icon">🏆</span>Leaderboard</a></li>
+						<li><a href="#"><span class="link-icon">💰</span>Earnings Calculator</a></li>
+					</ul>
+				</div>
+
+				<div class="footer-section">
+					<div class="section-header">
+						<div class="section-icon">👥</div>
+						<h3>Community Ecosystem</h3>
+					</div>
+					<ul>
+						<li><a href="https://discord.com/channels/1351754938870661233/1351764261483057232"
+								target="_blank"><span class="link-icon" target="_blank"><img
+										src="statics/icon/discord.png"></span>Discord Community</a></li>
+						<li><a href="https://x.com/TouchFlowFun" target="_blank"><span class="link-icon"><img
+										src="statics/icon/twitter.png"></span>X Updates</a></li>
+						<li><a href="#"><span class="link-icon" target="_blank"><img
+										src="statics/icon/telegram.png"></span>Telegram Group</a></li>
+						<li><a href="https://www.youtube.com/watch?v=zfAjzDta7_g" target="_blank"><span
+									class="link-icon" target="_blank"><img src="statics/icon/youtube.png"></span>YouTube
+								Channel</a></li>
+					</ul>
+				</div>
+
+				<div class="footer-section">
+					<div class="section-header">
+						<div class="section-icon">⚡</div>
+						<h3>Developer Resources</h3>
+					</div>
+					<ul>
+						<li><a href="#"><span class="link-icon">📚</span>API Documentation</a></li>
+						<li><a href="#"><span class="link-icon">📥</span>SDK Download</a></li>
+						<li><a href="#"><span class="link-icon">🔗</span>Smart Contracts</a></li>
+						<li><a href="#"><span class="link-icon">🔧</span>GitHub Repository</a></li>
+						<li><a href="#"><span class="link-icon">📄</span>Technical Whitepaper</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="copyright">
+				<p>© 2025 TouchFlow | AI Blind Box Universe</p>
+				<div class="copyright-links">
+					<a href="#">🔒 Privacy Policy</a>
+					<a href="#">📋 Terms of Service</a>
+					<a href="#">🛡️ Security Audit</a>
+					<a href="#">🚀 Powered by TouchFlowFun</a>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Audio Control -->
+		<div class="audio-control" onclick="toggleAudio()">
+			<span id="audioIcon">🔇</span>
+		</div>
+
+		<!-- Konami Code Hint -->
+		<div class="konami-hint">
+			<div>🎮</div>
+			<div>↑↑↓↓←→←→</div>
+			<div>Try it!</div>
+		</div>
+
+		<div class="login-panel-background" id="login-panel-id">
+			<div class="login-panel-background-panel">
+				<div class="login-panel-login-modal">
+					<!-- 像素边框装饰 -->
+					<div class="login-panel-pixel-border-top"></div>
+					<div class="login-panel-pixel-corner top-left"></div>
+					<div class="login-panel-pixel-corner top-right"></div>
+					<div class="login-panel-pixel-corner bottom-left"></div>
+					<div class="login-panel-pixel-corner bottom-right"></div>
+
+					<!-- 关闭按钮 -->
+					<button class="login-panel-modal-close">×</button>
+
+					<!-- 模态框内容 -->
+					<div class="login-panel-modal-content">
+						<!-- 像素品牌区域 -->
+						<div class="login-panel-modal-brand">
+							<div class="login-panel-pixel-logo"><img src="statics/logo.png"/></div>
+							<p class="login-panel-brand-subtitle">AI Memory Engine</p>
+						</div>
+
+						<!-- 像素状态栏 -->
+						<div class="login-panel-pixel-status">
+							<span class="login-panel-status-text">System Status: AI Engine Online</span>
+							<div class="login-panel-status-indicator"></div>
+						</div>
+
+						<!-- 欢迎文本 -->
+						<div class="login-panel-welcome-text">
+							<h3 class="login-panel-welcome-title">Access Terminal</h3>
+							<p class="login-panel-welcome-subtitle">Enter Universe Where AI Remembers</p>
+						</div>
+
+						<!-- 登录表单 -->
+						<form class="login-panel-login-form login-form">
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">User ID</label>
+								<input type="text" class="login-panel-form-input" placeholder="Your user name"
+									required>
+							</div>
+
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">Access Code</label>
+								<input type="password" class="login-panel-form-input" placeholder="Enter password"
+									required>
+							</div>
+
+							<button type="submit" class="login-panel-pixel-btn">
+								Connect to Universe
+							</button>
+						</form>
+
+						<!-- register -->
+						<form class="login-panel-login-form register-form">
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">User ID</label>
+								<input type="text" class="login-panel-form-input username" placeholder="User name" required>
+							</div>
+
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">Access Code</label>
+								<input type="password" class="login-panel-form-input password" placeholder="Enter password" required>
+							</div>
+
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">Comfirm Access Code</label>
+								<input type="password" class="login-panel-form-input cpassword" placeholder="Comfirm password" required>
+							</div>
+
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">Nickname</label>
+								<input type="text" class="login-panel-form-input nickname" placeholder="Nickname" required>
+							</div>
+
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">Email</label>
+								<input type="email" class="login-panel-form-input email" placeholder="Your@example.com">
+							</div>
+
+							<div class="login-panel-form-group">
+								<label class="login-panel-form-label">Sex</label>
+								<select class="login-panel-form-input">
+								  <option value="0">Secret</option>
+								  <option value="1">Male</option>
+								  <option value="2">Female</option>
+								</select>
+							</div>
+
+							<button type="submit" class="login-panel-pixel-btn" id="login-panel-pixel-btn-id-register">
+								Register
+							</button>
+						</form>
+
+						<!-- 像素分割线 -->
+						<div class="login-panel-pixel-divider">
+							<span>Or Connect Via</span>
+						</div>
+
+						<!-- 像素社交登录 -->
+						<div class="login-panel-social-login">
+							<button class="login-panel-pixel-social-btn">
+								<span class="login-panel-pixel-icon">🌐</span>
+								Web3
+							</button>
+							<button class="login-panel-pixel-social-btn">
+								<span class="login-panel-pixel-icon">🎮</span>
+								Steam
+							</button>
+						</div>
+
+						<!-- 底部 -->
+						<div class="login-panel-modal-footer">
+							Need Access?
+							<a href="javascript:void(0)" class="login-panel-footer-link" onclick="switchLoginPanel(1)">Create ID</a>
+						</div>
+						<div class="login-panel-modal-footer" style="display: none;">
+							Already have an account?
+							<a href="javascript:void(0)" class="login-panel-footer-link" onclick="switchLoginPanel(0)">Log in</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Easter Egg Overlay -->
+		<div class="easter-egg-overlay" id="easterEggOverlay">
+			<div class="tribute-message" id="tributeMessage">
+				<h1 class="tribute-title">🎉 EASTER EGG UNLOCKED! 🎉</h1>
+				<div class="tribute-content">
+					<p><strong>Congratulations, fellow gamer!</strong></p>
+					<p>You've discovered our secret tribute to the classic Konami Code!</p>
+					<p>From pixels to AI, from code to dreams - this is our love letter to gaming culture.</p>
+					<p><em>"Every great adventure starts with a curious soul willing to try something new."</em></p>
+				</div>
+
+				<div class="tribute-team">
+					<div class="tribute-member lumi">
+						<h3>LUMI</h3>
+						<p>"Code is poetry, and every bug is a haiku waiting to be debugged."</p>
+					</div>
+					<div class="tribute-member michael">
+						<h3>MICHAEL S</h3>
+						<p>"Great stories are told not just in words, but in every pixel and interaction."</p>
+					</div>
+					<div class="tribute-member lynn">
+						<h3>HERO LYNN</h3>
+						<p>"Design is the silent ambassador of our wildest imaginations."</p>
+					</div>
+				</div>
+
+				<button class="tribute-close" onclick="closeEasterEgg()">
+					Continue Your Journey
+				</button>
+			</div>
+		</div>
+		<!-- music -->
+		<audio src="resource/8bit_music.mp3" id="audion-box" style="display: none;"></audio>
+		<script src="js/javascript.js" defer></script>
+		<script src="js/login.js" defer></script>
+		<script src="js/global.js" defer></script>
+	</body>
+</html>

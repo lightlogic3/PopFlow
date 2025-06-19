@@ -5,6 +5,8 @@
 	import * as Icons from "@element-plus/icons-vue";
 	import { getRoleList } from "@/api/role";
 	import { watch } from 'vue';
+  import challenge from "@/assets/images/letter/challenge.png"
+  import task from "@/assets/images/letter/task.png"
 
 	interface MenuItem {
 		path : string;
@@ -174,7 +176,7 @@
 			current_url.value = item.nav_url
 		}
 	}
-	
+
 	const getBtnActive = (id: number) => {
 		return current_btn_id.value == id
 	}
@@ -286,10 +288,10 @@
 				<img src="../../../assets/images/letter/G.png" class="role-list-head-letter" /><span
 					class="role-list-head-text size12" v-show="!collapsed">Gaming Challenge</span>
 			</el-button>
-			
+
 			<div class="role-list-panel">
 				<div class="role-list-item" @click="handleNavigateToReplace({ nav_url: 'touchflow', btn_id: 2})"  :style="getBtnActive(2) ? 'background-color: rgba(77, 102, 225, 1); border-color: rgba(77, 102, 225, 1)':''">
-					<div class="role-list-left"><el-avatar :size="80" src="src/assets/images/logo.png"
+					<div class="role-list-left"><el-avatar :size="80" :src="challenge"
 							class="role-list-left-avatar" />
 					</div>
 					<div class="role-list-right" v-show="!collapsed">Task Challenge</div>
@@ -297,13 +299,13 @@
 			</div>
 			<div class="role-list-panel">
 				<div class="role-list-item" @click="handleNavigateToReplace({ nav_url: 'role/task', btn_id: 4})"  :style="getBtnActive(4) ? 'background-color: rgba(77, 102, 225, 1); border-color: rgba(77, 102, 225, 1)':''">
-					<div class="role-list-left"><el-avatar :size="80" src="src/assets/images/logo.png"
+					<div class="role-list-left"><el-avatar :size="80" :src="task"
 							class="role-list-left-avatar" />
 					</div>
 					<div class="role-list-right" v-show="!collapsed">Task Editor</div>
 				</div>
 			</div>
-			
+
 			<el-button type="primary" class="role-list-head"  @click="handleNavigateToReplace({ nav_url: 'world/list', btn_id: 3})" :style="getBtnActive(3) ? 'background-color: rgba(198, 100, 60, 1); border-color: rgba(198, 100, 60, 1)':''">
 				<img src="../../../assets/images/letter/W.png" class="role-list-head-letter" /><span
 					class="role-list-head-text" v-show="!collapsed">World</span>
@@ -399,6 +401,7 @@
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
+    justify-content: flex-start;
 
 		.list-panel-title {
 			display: flex;
@@ -436,6 +439,8 @@
 			margin: 10px 0;
 			padding: 0;
 			width: 90%;
+      display: flex;
+      justify-content: flex-start;
 
 			.role-list-head-letter {
 				width: 30px;
@@ -458,6 +463,8 @@
 
 			.role-list-head-text {
 				margin-left: 10px;
+        display: flex;
+        justify-content: flex-start;
 
 				&.size8 {
 					font-size: 8px;
@@ -483,12 +490,12 @@
 			&.point-event-none {
 				pointer-events: none;
 			}
-			
+
 			&:hover {
 				background-color: $theme-hover-0;
 				border-color: $theme-hover-0;
 			}
-			
+
 			&:active {
 				background-color: $theme-hover-0;
 				border-color: $theme-hover-0;
@@ -548,31 +555,31 @@
 			filter: drop-shadow(0 0 2px rgba(0, 160, 209, 0.4));
 		}
 	}
-	
+
 	.theme-0 {
 		background-col: $theme-0;
 		border-color: $theme-0;
-		
+
 		&:hover {
 			background: $theme-hover-0;
 			border-color: $theme-hover-0;
 		}
 	}
-	
+
 	.theme-1 {
 		background: $theme-1;
 		border-color: $theme-1;
-		
+
 		&:hover {
 			background: $theme-hover-1;
 			border-color: $theme-hover-1;
 		}
 	}
-	
+
 	.theme-2 {
 		background: $theme-2;
 		border-color: $theme-2;
-		
+
 		&:hover {
 			background: $theme-hover-2;
 			border-color: $theme-hover-2;
